@@ -1,13 +1,13 @@
 # Написать вложенную схему валидации данных, получить ошибки валидации
 # Экспортировать данные в формат JSON с помощью Pydantic
 # Прочитать данные из JSON с помощью Pydantic
-
-from pydantic import BaseModel
+from datetime import date
+from pydantic import BaseModel, constr, Field
 
 
 class Book(BaseModel):
-    title: str
-    year_published: int
+    title: constr(max_length=100)
+    year_published: int = Field(ge=1900, le=date.today().year)
 
 class Author(BaseModel):
     name: str
